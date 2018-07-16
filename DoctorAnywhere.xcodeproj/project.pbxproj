@@ -16,6 +16,9 @@
 		0965E8A820FCC0CE002CBC96 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0965E8A720FCC0CE002CBC96 /* APIService.swift */; };
 		0965E8AA20FCC0EE002CBC96 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0965E8A920FCC0EE002CBC96 /* User.swift */; };
 		0965E8AC20FCC70E002CBC96 /* UsersTableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0965E8AB20FCC70D002CBC96 /* UsersTableViewDataSource.swift */; };
+		0965E8B020FCD6DC002CBC96 /* UsersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0965E8AE20FCD6DC002CBC96 /* UsersTableViewCell.swift */; };
+		0965E8B120FCD6DC002CBC96 /* UsersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0965E8AF20FCD6DC002CBC96 /* UsersTableViewCell.xib */; };
+		0965E8B320FCDF83002CBC96 /* UsersTableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0965E8B220FCDF83002CBC96 /* UsersTableViewDelegate.swift */; };
 		1218A176770A32A72C5B7212 /* Pods_DoctorAnywhere.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6171ECFB2E975F5BE113D47E /* Pods_DoctorAnywhere.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +35,9 @@
 		0965E8A720FCC0CE002CBC96 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		0965E8A920FCC0EE002CBC96 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		0965E8AB20FCC70D002CBC96 /* UsersTableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewDataSource.swift; sourceTree = "<group>"; };
+		0965E8AE20FCD6DC002CBC96 /* UsersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewCell.swift; sourceTree = "<group>"; };
+		0965E8AF20FCD6DC002CBC96 /* UsersTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UsersTableViewCell.xib; sourceTree = "<group>"; };
+		0965E8B220FCDF83002CBC96 /* UsersTableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersTableViewDelegate.swift; sourceTree = "<group>"; };
 		493B5AE4B414AEF1FC6F587E /* Pods-DoctorAnywhere.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoctorAnywhere.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DoctorAnywhere/Pods-DoctorAnywhere.debug.xcconfig"; sourceTree = "<group>"; };
 		6171ECFB2E975F5BE113D47E /* Pods_DoctorAnywhere.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DoctorAnywhere.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -75,7 +81,7 @@
 				0965E89F20FCC04E002CBC96 /* Supporting Files */,
 				0965E8A120FCC068002CBC96 /* View Controllers */,
 				0965E8A020FCC060002CBC96 /* Storyboards */,
-				0965E8AB20FCC70D002CBC96 /* UsersTableViewDataSource.swift */,
+				0965E8AD20FCD6BA002CBC96 /* Table Views */,
 			);
 			path = DoctorAnywhere;
 			sourceTree = "<group>";
@@ -129,6 +135,17 @@
 				0965E8A520FCC0AB002CBC96 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0965E8AD20FCD6BA002CBC96 /* Table Views */ = {
+			isa = PBXGroup;
+			children = (
+				0965E8AB20FCC70D002CBC96 /* UsersTableViewDataSource.swift */,
+				0965E8AE20FCD6DC002CBC96 /* UsersTableViewCell.swift */,
+				0965E8AF20FCD6DC002CBC96 /* UsersTableViewCell.xib */,
+				0965E8B220FCDF83002CBC96 /* UsersTableViewDelegate.swift */,
+			);
+			path = "Table Views";
 			sourceTree = "<group>";
 		};
 		5674DCDD1811016E48FC6ED2 /* Frameworks */ = {
@@ -208,6 +225,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0965E8B120FCD6DC002CBC96 /* UsersTableViewCell.xib in Resources */,
 				0965E89820FCBF0D002CBC96 /* LaunchScreen.storyboard in Resources */,
 				0965E89520FCBF0D002CBC96 /* Assets.xcassets in Resources */,
 				0965E89320FCBF0A002CBC96 /* Main.storyboard in Resources */,
@@ -265,9 +283,11 @@
 				0965E8A620FCC0AB002CBC96 /* UIView+Extension.swift in Sources */,
 				0965E89020FCBF0A002CBC96 /* UsersViewController.swift in Sources */,
 				0965E8AA20FCC0EE002CBC96 /* User.swift in Sources */,
+				0965E8B020FCD6DC002CBC96 /* UsersTableViewCell.swift in Sources */,
 				0965E8AC20FCC70E002CBC96 /* UsersTableViewDataSource.swift in Sources */,
 				0965E8A820FCC0CE002CBC96 /* APIService.swift in Sources */,
 				0965E88E20FCBF0A002CBC96 /* AppDelegate.swift in Sources */,
+				0965E8B320FCDF83002CBC96 /* UsersTableViewDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
