@@ -12,22 +12,28 @@ import SDWebImage
 class UsersTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var itemsCollectionView: UICollectionView! {
+        didSet {
+            itemsCollectionView.register(ItemCollectionViewCell.nib(), forCellWithReuseIdentifier: "ItemCell")
+            itemsCollectionView.isScrollEnabled = false
+        }
+    }
     @IBOutlet weak var userImageView: UIImageView! {
         didSet {
             userImageView.layer.cornerRadius = userImageView.bounds.width/2
             userImageView.layer.masksToBounds = true
         }
     }
-    
+        
     func configure(name: String, imageURL: String) {
         userNameLabel.text = name
         if let url = URL(string: imageURL) {
-            userImageView.sd_setImage(with: url)
+            userImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "user_placeholder"))
         }
     }
     
     override func prepareForReuse() {
-        userImageView.image = nil
+        userImageView.image = #imageLiteral(resourceName: "user_placeholder")
         userNameLabel.text = ""
     }
 }

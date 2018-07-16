@@ -35,7 +35,7 @@ class APIService {
     }
     
     func getUsers(offset: Int, limit: Int = 10, completionHandler: @escaping (([User]?, Error?) -> Void)) {
-        var url = "https://sd2-hiring.herokuapp.com/api/users?offset=\(offset)&limit=\(limit)"
+        let url = "https://sd2-hiring.herokuapp.com/api/users?offset=\(offset)&limit=\(limit)"
         var users: [User] = []
         request(url: url,
                 method: .get,
