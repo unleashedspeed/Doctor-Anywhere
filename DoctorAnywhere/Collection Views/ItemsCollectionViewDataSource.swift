@@ -28,7 +28,7 @@ public class ItemsCollectionViewDataSource: NSObject, UICollectionViewDataSource
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! ItemCollectionViewCell
         if let items = user.items, let url = URL(string: items[indexPath.row]) {
-            cell.itemImageView.sd_setImage(with: url)
+            cell.itemImageView.sd_setImage(with: url, placeholderImage: #imageLiteral(resourceName: "placeholder"))
         }
         
         return cell

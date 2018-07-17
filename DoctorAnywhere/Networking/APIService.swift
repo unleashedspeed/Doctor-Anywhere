@@ -63,6 +63,10 @@ class APIService {
                                     users.append(user)
                                 }
                                 
+                                if let hasMore = data["has_more"] as? Bool {
+                                    hasMoreUser = hasMore
+                                }
+                                
                                 completionHandler(users, nil)
                             } catch let err {
                                 print("Err", err)

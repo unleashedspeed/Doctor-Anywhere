@@ -16,6 +16,7 @@ class UsersTableViewCell: UITableViewCell {
         didSet {
             itemsCollectionView.register(ItemCollectionViewCell.nib(), forCellWithReuseIdentifier: "ItemCell")
             itemsCollectionView.isScrollEnabled = false
+            itemsCollectionView.allowsSelection = false
         }
     }
     @IBOutlet weak var userImageView: UIImageView! {

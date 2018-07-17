@@ -8,6 +8,8 @@
 
 import UIKit
 
+var hasMoreUser = true
+
 class UsersViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView! {
@@ -22,7 +24,6 @@ class UsersViewController: UIViewController {
     }
 
     var dataSource: UsersTableDataSource!
-//    var delegate: UsersTableViewDelegate?
     var collectionViewDataSource: ItemsCollectionViewDataSource!
     var users : [User] = []
     fileprivate var loadingUsers = false
@@ -37,9 +38,7 @@ class UsersViewController: UIViewController {
                 if users?.count ?? 0 > 0 {
                     self.users = users!
                     self.dataSource  = UsersTableDataSource(users: self.users, cellIdentifier: "UserCell")
-//                    self.delegate = UsersTableViewDelegate(users: self.users)
                     self.tableView.dataSource = self.dataSource
-//                    self.tableView.delegate = self.delegate
                     DispatchQueue.main.async {
                         self.tableView.reloadData()
                         self.loadingUsers = false
@@ -82,11 +81,6 @@ extension UsersViewController: UICollectionViewDelegate, UICollectionViewDelegat
             return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.width)
         }
         
-//        let remainder = (Double(indexPath.item)/3).truncatingRemainder(dividingBy: 1)
-//        if remainder == 0 {
-//            return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.width)
-//        }
-        
         return CGSize(width: (collectionView.frame.size.width - 5) / 2, height: (collectionView.frame.size.width - 5) / 2)
     }
     
@@ -102,8 +96,9 @@ extension UsersViewController: UICollectionViewDelegate, UICollectionViewDelegat
 // MARK:- ScrollView Delegate Methods
 extension UsersViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if (self.tableView?.indexPathsForVisibleRows?.contains([0, self.users.count - 1]) ?? false) && !loadingUsers && self.users.count >= 10 {
+        if (self.tableView?.indexPathsForVisibleRows?.contains([0, self.users.count - 1]) ?? false) && !loadingUsers && hasMoreUser {
             loadingUsers = true
+            let count = self.users.count
             APIService.standard.getUsers(offset: self.users.count) { (users, error) in
                 if error == nil {
                     if users?.count ?? 0 > 0 {
@@ -112,6 +107,7 @@ extension UsersViewController {
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                             self.loadingUsers = false
+                            self.tableView.scrollToRow(at: IndexPath(row: count - 1, section: 0), at: .top, animated: false)
                         }
                     }
                 } else {

@@ -11,12 +11,5 @@ import UIKit
 class ItemCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var itemImageView: UIImageView!
-    
-    var image: UIImage! {
-        didSet {
-            self.itemImageView.image = image
-            self.setNeedsLayout()
-        }
-    }
 
 }
