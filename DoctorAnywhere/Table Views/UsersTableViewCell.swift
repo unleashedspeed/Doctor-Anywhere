@@ -34,6 +34,8 @@ class UsersTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         userImageView.image = #imageLiteral(resourceName: "user_placeholder")
         userNameLabel.text = ""
     }

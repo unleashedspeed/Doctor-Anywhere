@@ -19,20 +19,31 @@ class UsersViewController: UIViewController {
             tableView.allowsSelection = false
             tableView.rowHeight = UITableViewAutomaticDimension
             tableView.estimatedRowHeight = 48
-            tableView.tableFooterView = UIView()
+            tableView.allowsSelection = false
         }
     }
-
+    
+    fileprivate var loadingUsers = false
     var dataSource: UsersTableDataSource!
     var collectionViewDataSource: ItemsCollectionViewDataSource!
     var users : [User] = []
-    fileprivate var loadingUsers = false
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.center = self.tableView.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        tableView.addSubview(activityIndicator)
+        
+        return activityIndicator
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = NSLocalizedString("Users", comment: "Users")
         loadingUsers = true
+        activityIndicator.startAnimating()
         APIService.standard.getUsers(offset: 0) { (users, error) in
             if error == nil {
                 if users?.count ?? 0 > 0 {
@@ -40,6 +51,7 @@ class UsersViewController: UIViewController {
                     self.dataSource  = UsersTableDataSource(users: self.users, cellIdentifier: "UserCell")
                     self.tableView.dataSource = self.dataSource
                     DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
                         self.tableView.reloadData()
                         self.loadingUsers = false
                     }
@@ -47,6 +59,7 @@ class UsersViewController: UIViewController {
             } else {
                 //do error handling here
                 self.loadingUsers = false
+                self.activityIndicator.stopAnimating()
             }
         }
     }
@@ -66,22 +79,22 @@ extension UsersViewController: UITableViewDelegate {
         let userItemsCount = users[indexPath.row].items?.count ?? 0
         if userItemsCount % 2 == 0 {
             return ((tableView.bounds.width * CGFloat(userItemsCount / 2)) / 2) +  48
-        } else if userItemsCount == 1 {
-            return tableView.bounds.width + 48
         } else {
-            return ((tableView.bounds.width * CGFloat(userItemsCount / 2))) + 48
+            let tableViewHeight = tableView.bounds.width + ((tableView.bounds.width * CGFloat((Double(userItemsCount / 2) * 0.5)))) + 48
+            let totalInterimSpacing = CGFloat((userItemsCount / 2) * 5)
+            return tableViewHeight - totalInterimSpacing
         }
     }
 }
 
 // MARK:- CollectionView Data Source Methods
-extension UsersViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension UsersViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.numberOfItems(inSection: 0) % 2 != 0 && indexPath.row == 0 {
-            return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.width)
+            return CGSize(width: collectionView.bounds.size.width, height: collectionView.bounds.size.width)
         }
         
-        return CGSize(width: (collectionView.frame.size.width - 5) / 2, height: (collectionView.frame.size.width - 5) / 2)
+        return CGSize(width: (collectionView.bounds.size.width - 5) / 2, height: (collectionView.bounds.size.width - 5) / 2)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
