@@ -85,7 +85,6 @@ extension UsersViewController {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if (self.collectionView?.indexPathsForVisibleItems.contains([self.users.count - 1, 0]) ?? false) && !loadingUsers && hasMoreUser {
             loadingUsers = true
-            let count = self.users.count
             APIService.standard.getUsers(offset: self.users.count) { (users, error) in
                 if error == nil {
                     if users?.count ?? 0 > 0 {
